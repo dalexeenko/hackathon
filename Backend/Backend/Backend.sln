@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "Backend", "Backend\Backend.ccproj", "{8B4C4499-B3AB-4994-B0C2-B27A07781D9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerRole", "WorkerRole1\WorkerRole.csproj", "{F690D154-7096-4BA4-B97C-D6BE2DCBB3FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SshTestApp", "SshTestApp\SshTestApp.csproj", "{2F3C9DA1-9CD5-4BEA-9F01-EBFFBC0E3CA6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8B4C4499-B3AB-4994-B0C2-B27A07781D9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B4C4499-B3AB-4994-B0C2-B27A07781D9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B4C4499-B3AB-4994-B0C2-B27A07781D9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B4C4499-B3AB-4994-B0C2-B27A07781D9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F690D154-7096-4BA4-B97C-D6BE2DCBB3FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F690D154-7096-4BA4-B97C-D6BE2DCBB3FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F690D154-7096-4BA4-B97C-D6BE2DCBB3FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F690D154-7096-4BA4-B97C-D6BE2DCBB3FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F3C9DA1-9CD5-4BEA-9F01-EBFFBC0E3CA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F3C9DA1-9CD5-4BEA-9F01-EBFFBC0E3CA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F3C9DA1-9CD5-4BEA-9F01-EBFFBC0E3CA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F3C9DA1-9CD5-4BEA-9F01-EBFFBC0E3CA6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

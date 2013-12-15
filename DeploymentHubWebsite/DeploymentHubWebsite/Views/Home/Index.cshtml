@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "DeploymentHub";
+}
+
+
+    
+<div class="hero-unit">    
+    @if (Request.IsAuthenticated)
+    {
+        <p class="lead">
+    <strong>DONE!
+            </strong>
+     <s>Step 1: Register now to see how your costs compare in the cloud!</s>
+        </p>
+        <p>@Html.ActionLink("Proceed to Step 2", "Creds", "Home")</p>
+    }
+    else
+    {
+        <h1>Step 1</h1>
+        <p class="lead">Register now to compare AWS to Azure!</p>
+        <p>@Html.ActionLink("Go!", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class="btn btn-large btn-warning", @style = "width: 200px; font-size: 18pt;" })</p>
+    }
+</div>
+<div class="row">
+    <div class="span2"></div>
+    <div class="span3">
+        <div style="text-align:center;">
+            <img style="max-width:none" src="/img/awsazure.png" />
+        </div>
+    </div>
+    <div class="span2"></div>
+</div>
+
+    
+    

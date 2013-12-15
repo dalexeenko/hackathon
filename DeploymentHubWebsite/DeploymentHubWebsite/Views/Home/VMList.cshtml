@@ -1,0 +1,180 @@
+﻿@using AWSTool;
+@using DataProviders;
+@{
+    ViewBag.Title = "See Your VM's";
+}
+
+<div class="hero-unit">
+
+    <h1>Step 3</h1>
+    <p class="lead">Compare the costs of your VM's in each provider</p>
+</div>
+
+<h2>Account Summary</h2>
+
+<div class="row">
+    <div class="span2"></div>
+    <div class="span4" style="text-align:center;">
+       <p>TOTAL EC2 INSTANCES COST:</p>
+        <h1>@((ViewBag.totalAWSCost * 744).ToString("C"))</h1>
+
+    </div>
+    <div class="span4" style="text-align:center;">
+        <p>COST THESE CAN BE IN AZURE:</p>
+        <h1>@((ViewBag.totalAzureCost * 744).ToString("C"))</h1>
+    </div>
+
+</div>
+
+<div class="pull-right">
+@{    var totalDelta = ((ViewBag.totalAWSCost - ViewBag.totalAzureCost) * 744);   }
+    <a href="https://twitter.com/intent/tweet?button_hashtag=DeploymentHub&text=I%20can%20save%20@(totalDelta.ToString("C"))%2Fmonth%20by%20switching%20AWS%20Vms%20to%20Azure!" class="twitter-hashtag-button" data-size="large">Tweet #DeploymentHub</a>
+    <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
+</div>
+
+<h2>All your VM's</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>Location</th>
+            <th>Type</th>
+            <th>Cost</th>
+            <th></th>
+        </tr>
+
+    </thead>
+    <tbody>
+        <tr>
+            <th colspan="5">EC2 Instances</th>
+        </tr>
+        @foreach (EC2Instance instance in ViewBag.instances)
+        {
+            <tr class="@(instance.MigrationStarted ? "success" : "" )">
+                <td>
+                    @if (!instance.IsRunning)
+                    {
+                        <img src="/img/stop.png" />
+                    }
+                    @if (!String.IsNullOrWhiteSpace(instance.Tags.ContainsKey(@"Name") ? instance.Tags[@"Name"] : null))
+                    {
+                        <span>@instance.Tags[@"Name"]</span>
+                    }
+                    else
+                    {
+                        <span>@instance.InstanceId</span>
+                    }
+                </td>
+                <td>@instance.Location</td>
+                <td>@instance.Type</td>
+                <td>
+                <strong>@((instance.TotalAWSHourlyCost * 744).ToString("C"))</strong> <span class="lite">per month</span>
+                    <button type="button" class="btn btn-mini pull-right" onclick="$('#@instance.InstanceId-details').toggle(400);">
+                        more...
+                    </button>          
+                </td>
+                <td>
+                    @{
+            var delta = (instance.TotalAWSHourlyCost - instance.TotalAzureHourlyCost) * 744;
+            if(instance.MigrationStarted){
+                        <a href="~/Home/Status?instance_id=@instance.InstanceId" class="btn btn-success pull-right">Migrating - @instance.Step</a>
+                       
+            }else if(delta > 0){
+                        <a href="~/Home/UploadSsh?instance_id=@instance.InstanceId" class="btn btn-primary pull-right">Save @(delta.ToString("C")) per month NOW!</a>
+                    } else
+                    {
+                        <a href="~/Home/UploadSsh?instance_id=@instance.InstanceId" class="btn pull-right">Migrate</a>
+
+            }
+                    
+                    }  
+                </td>
+            </tr>
+            <tr id="@instance.InstanceId-details" style="display:none;">
+                <td colspan="5">
+                    <table class="table" style="margin: 12px; background-color: #f7f7f7; border-radius: 8px;">
+                       <thead>
+                        <tr style="font-size: 12pt; ">
+                            <th>Category</th>
+                            <th>Monthly AWS Cost</th>
+                            <th>Monthly Azure Cost</th>
+                        </tr>
+                         <tbody>
+
+                        <tr>
+                            <th>Compute hours</th><td>@((instance.HourlyCost * 744).ToString("C"))</td><td>@((instance.AzureHourlyCompute * 744).ToString("C"))</td></tr>
+                        @if(instance.IsElbEnabled)
+                        {
+                        <tr>
+                            <th>Load balancing</th><td>$18.60</td><td>Free!</td>
+                        </tr>
+                        }
+                        @if (instance.IsEbsEnabled)
+                        {
+                         <tr>
+                            <th>Storage</th>
+                             <td>
+                                 $0.10 <span class="lite">per GB</span><br />
+                                $0.10 <span class="lite">per MM transactions</span>
+                             </td>
+                         <td>
+                             $0.07 <span class="lite">per GB</span><br />
+                            $0.10 <span class="lite">per MM transactions</span>
+                        </td>
+                         
+                         </tr>
+                        }
+                             <tr>
+                                 <th>Data Out</th>
+                                 <td>
+                                     $0.12 <span class="lite">per GB</span><br />
+                                     <span class="lite">+ 1 GB Free</span>
+                                 </td>
+                                 <td>
+                                     $0.12 <span class="lite">per GB</span><br />
+                                     <span class="lite">+ 5 GB Free</span>
+                                 </td>
+
+                             </tr>
+                                               </tbody>
+                    <tfoot>
+                        <tr style="background-color: #eee;">
+                        <th>
+                            <strong>Total Cost*</strong>
+                        </th>
+                        <th>
+                                @((instance.TotalAWSHourlyCost * 744).ToString("C"))
+                        </th>
+                            <th>
+                               @((instance.TotalAzureHourlyCost * 744).ToString("C"))
+                            </th>
+                    </tr>
+                </tfoot>
+            </table>
+                </td>
+            </tr>
+        }
+        @if(ViewBag.none)
+        {
+            <tr><td colspan="5"><span style="font-size: 9pt; color: #999;">You don't have any EC2 instances at this time...</span></td></tr>
+        }
+        <tr>
+            <th colspan="5">Existing Azure Instances</th>
+        </tr>
+        @foreach (AzureVmInfo azureinstance in ViewBag.azureinstances)
+        {
+            <tr>
+                <td>@azureinstance.Name</td>
+                <td>@azureinstance.Region</td>
+                <td>@azureinstance.Size</td>
+                <td><strong>@((azureinstance.HourlyCost * 744).ToString("C"))</strong> <span class="lite">per month</span></td>
+                <td></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<P class="lite">* The Costs assume 30 GB of Disk</P>

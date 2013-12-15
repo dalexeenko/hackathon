@@ -1,0 +1,75 @@
+﻿@using DeploymentHubWebsite.Models
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Deployment Hub";
+}
+
+
+<div class="hero-unit">
+    <h1>Step 5: Migration status</h1>
+    <p class="lead">We are moving your AWS resources to Azure!</p>
+</div>
+
+<script type="text/javascript">
+    setTimeout("location.reload(true);", 60000);
+</script>
+
+<div class="row" style="background-color: #f7f7f7; border-radius:  8px;">
+    @{
+        Operation[][] statuses = ViewBag.Status;
+        var stat = statuses.Last().Last().Status;
+        var count = statuses.Count();
+        
+        if (stat == "Completed")
+        {   
+            <div class="span6">
+                <h2>Migration Completed</h2>
+            </div>
+        }
+        else
+        {
+            <div class="span6">
+                <h2>@stat</h2>
+            </div>
+            <div class="span6">
+                           <br />  <p>@statuses.Last().Last().Message</p>
+
+
+
+            </div>
+        }
+
+    }
+</div>
+
+<h2>Details</h2>
+<table class="table">
+@foreach (Operation[] operationGroup in ViewBag.Status)
+{
+    <tr class="@(operationGroup.Last().Status == "Completed" ? "success" : "")">
+        <td>@operationGroup.Last().StepId</td>
+        <td>@operationGroup.Last().Status</td>
+        <td>@operationGroup.First().StartTime</td>
+        <td>@operationGroup.Last().EndTime</td>
+        <td><button class="btn" onclick="$('#@operationGroup.First().StartTime.Ticks').toggle(400);">Details...</button></td>
+    </tr>
+    <tr style="display: @(operationGroup.Last().Status == "Completed" ? "none" : "");" id="@operationGroup.First().StartTime.Ticks"><td colspan="5">
+        <table>
+      @foreach (Operation op in operationGroup)
+        {
+            <tr>
+        <td>@op.SubstepId</td>
+        <td>@op.Message</td>
+        <td>@op.Status</td>
+        <td>@op.StartTime</td>
+        <td>@op.EndTime</td>
+            </tr>
+
+
+        }
+</table></td></tr>
+
+  
+      
+}
+</table>

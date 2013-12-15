@@ -1,0 +1,47 @@
+﻿@using DeploymentHubWebsite.Models
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Migrate VM";
+}
+
+<div class="hero-unit">
+    <h1>Step 4</h1>
+    <p class="lead">Give us access to your VM</p>
+</div>
+    <div class="row">
+
+
+        <div class="span3">
+        </div>
+
+            <div class="span6">
+    <p class="lead">We can seamlessly transfer your Virtual Machine from EC2 to Azure.</p>
+    <p>Once we the complete transfer, all you need to do is point DNS to your new Azure instance!</p>
+    
+    @using (Html.BeginForm("SubmitSshKeys", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+         @Html.AntiForgeryToken()
+            <fieldset class="coolform">
+                    <p><label for="file">Upload the VM's SSH Key</label>
+                        <input type="file" id="file" name="file" value="@ViewBag.fileContent" />
+                        <input type="hidden" id="identity_id" name="identity_id" value="@ViewBag.instance_id">
+                    </p>
+                <p>
+                    <label for="sshuser">Enter the SSH User (optional)</label>
+                <input type="text" id="sshuser" name="sshuser" value="@ViewBag.sshUser" />
+                    </p>
+                <div id="StorageAccountNamesId">
+                    <label for="StorageAccountNames">Choose the storage account to use for your new VM</label>
+                    <select name="selector" id="selector">
+                        @foreach (var item in ViewBag.list)
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    </select>
+                </div>
+                    <p><button type="submit" class="btn btn-success btn-block" style="font-size: 20pt;">Migrate from AWS to Azure!</button></p>
+            </fieldset>
+    }
+
+</div>
+</div>

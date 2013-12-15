@@ -1,0 +1,56 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Cloud Credentials";
+}
+<div class="hero-unit">
+
+    <h1>Step 2</h1>
+    <p class="lead">Upload the credentials for your Azure and AWS services</p>
+    </div>
+
+    @using (Html.BeginForm("SubmitKeys", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="row coolform">
+            <div class="span1"></div>
+            <div class="span5">
+                <h2>AWS Access Credentials</h2>
+                <p>First, you need to paste the access credentials for your AWS Account</p>
+                <p>
+                    <a href="https://portal.aws.amazon.com/gp/aws/securityCredentials#cred_intro_content" class="btn btn-info" target="_blank">See my Access Credentials...</a>
+                </p>
+                <p>
+                    <label for="accessKey">Access Key ID:</label>
+                    <input type="text" id="accessKey" name="accessKey" value="@ViewBag.accessKey" />
+                </p>
+                <p>
+                    <label for="secretKey">Secret Access Key:</label>
+                    <input type="text" id="secretKey" name="secretKey" value="@ViewBag.secretKey" />
+                </p>
+
+
+            </div>
+            <div class="span5">
+                <h2>Azure Publishing Settings</h2>
+                <p>Second, you need to need to upload the management profile for your Azure Subscription.</p>
+
+                <p>            <a href="https://manage.windowsazure.com/publishsettings/Index?client=vs&SchemaVersion=1.0" target="_blank" class="btn btn-info">Download Publishing Settings here...</a></p>
+
+                <label for="file">Choose File:</label>
+                <input type="file" id="file" name="file" />
+
+            </div>
+            <div class="span1"></div>
+        </div>
+        <div class="row">
+            
+        <div class="span3">
+
+            </div>
+            <div class="span6">
+                <h2><button type="submit" class="btn-block btn-large btn-success" style="font-size: 20pt;">Start Analyzing My Account</button></h2>
+            </div>
+          </div>
+
+
+    }
