@@ -15,30 +15,7 @@ namespace SshTestApp
     {
         private static void Main(string[] args)
         {
-            var ssh = @"
------BEGIN RSA PRIVATE KEY-----
-MIIEpAIBAAKCAQEAmkezNfQJOcr6XITfspznbcZCpu94zmB9ebKvnP9Rh5b5PfcQ/lSm40HWPQoL
-hfJ2V1ucknMDEIrAFPREHLAwpSkJ8e0TJvRnHpEQ5bwVlvZRNVcog40L389fyaM8AovNrUXLlWwB
-21gQVWX5YpYjxbpj/qNdU+ZX8q1WjxaSpqc/mz4ajuVGo5UAxEpZUMpYA33LR821+VsfadhX/htB
-YDBepsT8/oanQuBz+8V4eDUg1Eh/BtD5HLYVETEMubwQUpRe2Ily25TTUsOWBRDu+FawSVlx3JgC
-zucgwPj6SXa5yE8l6z8v2So9E3qUkw6dOHp5gp+PlR1cLJNKans1rQIDAQABAoIBAAice+pFBsbN
-B5Bmcj37+AbujAXZU/rg89/5E0hGD/zrdln5El+/xdjlcdnSV7ZQRD64BFNATCl+NR52S972DqEJ
-W16/htQjzCWunyzThLj6YqoBhWdiVglV/9i3XcAeoYpMXQKoFqpxjefWW0cfbju5HZ+26pymPL50
-4mH2NpVKpcKpZgLcUwDTHcbbt4z/C7g50a/ErIyvbrwgGKDtKCz8BHOY9/yFR49y7YTXvjeeFFA8
-3vxh+YAwweIIVBIzwdT3iUcBYf2etjVLMAhgBE4jkJJ4JymbXTHF3VqO0PTtDM+SMXiJ5Y+aGNuD
-9UlDKMAw6v5Wg7XlSvjuXkAOqwECgYEA+fnrkFEsjgyFSs9mdo68DSMDLGWMJ+WmBJGmcdQss3t0
-pGF2f420db/f/xe17QZikIvQQ+cBYYBocPAWWiFrtpcHeMMUvJDAUlJSVucxjh2pgQK2yipb2Jlz
-EV+62n/bsNCBabi4W18gvHieEGPw8WzSA9/uOfPz1SZexaY8kY0CgYEAnf9wciYLK9e3xO9TsOE6
-DVefk/7IvbXuQIbQ2VrvdPgs3E9I66Fw6RkDMC7a18WAjDOr7uT1HJFeJvGAKqZSlm1+L2OC60UK
-0r4AD2shiQOOV5WGr/iaBtuFMntnlqNBDfadF/bx5d4jOWOEa76NFYQoclQQyenf++GUdBSpXKEC
-gYEAxz8SKOTau5p1P+zSQduBPoNSyzdhoIdmbaveXEp/Gsxja4aX2hGL7nLyyrQOeQ+mzonyhb0C
-F8Iu/R4Q4uRSo6X7+aCczbQe5z7gjI4YrKst6TvNkJR0ws+ErSt9lx1kcamwDSGEKKhJQpBthKj0
-aqqPNzFtA9pT1uiPj8Dx9B0CgYAg3AVI2Dyui5i+rn+bY9ws9jJMF0ssmW/Jn8BD1DPFAfBiiWLD
-Drpq4DbXiIcfJQZNIln5v0hy/pC0TLm5JQo8Gt2JgYqy35MWrUlZ64/37PNnp8NxSaTPFEypaRzs
-KVvYSZf2afd5NS/iOZ5KwkCZXvkCfhVXyPo6annzgnCOwQKBgQDA1+RheQn1RtIBA+DxMzR/rrGl
-xlTW4GEu/cs9M0WAXYvF4XCgV9OhUT7gYP9Lbfl9CYZJklXzf2pB14pvboB2tCyN22/Fu6haolvU
-agenLrp7LLa6/6Re+/FubIPCRxp/0qQyv+d0S/htDisMR7tj/zDBOe6eCr01/b8wzxdISA==
------END RSA PRIVATE KEY-----";
+            var ssh = @"";
 
             var key = Guid.NewGuid().ToString().ToLowerInvariant();
 
@@ -49,12 +26,12 @@ agenLrp7LLa6/6Re+/FubIPCRxp/0qQyv+d0S/htDisMR7tj/zDBOe6eCr01/b8wzxdISA==
                     instanceId = "i-0356e734",
                     PartitionKey = key,
                     RowKey = key,
-                    awsHost = "ec2-54-214-91-252.us-west-2.compute.amazonaws.com",
+                    awsHost = "us-west-2.compute.amazonaws.com",
                     awsUserName = "bitnami",
                     awsSSHkeys = ssh,
                     azureStorageAccountName = "ubuntuaws",
                     azureStorageAccountKey =
-                        "HuhJWqcuXyrMzCB4VYsZs2ZfpvpmDVqVwh7uNAxJ4qnmmjbxfnztv5L81fxM6PN/2GmqW8hYvIXxt3Wqqp9qFA=="
+                        ""
                 };
 
             RunAndWaitCommand(
