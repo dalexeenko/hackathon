@@ -439,7 +439,7 @@ namespace WorkerRole1
             var creds = CloudStorageAccount.DevelopmentStorageAccount;
             if (!RoleEnvironment.IsEmulated)
             {
-                creds = CloudStorageAccount.Parse("DefaultEndpointsProtocol=https;AccountName=azurathonmh;AccountKey=U/wAoYULNT2DHK5WH595rowUhDfMedYp41HdhJD+HCS8iTHQe8xsSuY3mjAFgWZ7Gd/AgxwE3I9+I4sq6VX9qQ==");
+                creds = CloudStorageAccount.Parse(Settings.OperationAccount);
             }
 
             var key = Guid.NewGuid().ToString().ToLowerInvariant();

@@ -3,8 +3,14 @@
   <WorkerRole name="WorkerRole" vmsize="Small">
     <Imports>
       <Import moduleName="Diagnostics" />
-      <Import moduleName="RemoteAccess" />
-      <Import moduleName="RemoteForwarder" />
     </Imports>
+    <ConfigurationSettings>
+      <Setting name="InputStorageConnectionString" />
+      <Setting name="OperationStorageConnectionString" />
+      <Setting name="SeedDemoWork" />
+      <Setting name="DemoSshPrivateKeyPath" />
+      <Setting name="DemoAzureStorageAccountName" />
+      <Setting name="DemoAzureStorageAccountKey" />
+    </ConfigurationSettings>
   </WorkerRole>
 </ServiceDefinition>

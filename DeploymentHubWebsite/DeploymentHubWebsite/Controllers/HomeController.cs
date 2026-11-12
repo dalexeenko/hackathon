@@ -188,9 +188,6 @@ namespace DeploymentHubWebsite.Controllers
 
         public EC2Instance[] ListAWSVirtualMachines(string accessKey, string secretKey, bool loadImages = true)
         {
-            // Example keys below
-            // "AKIAIEFHKSHZIZMNAO5A", "O9IWZnMpfiPSu9hQ4CVilBVg8Mw46HnYH0/x8BGx"
-            // or, for stephen's account "AKIAJLTODBLZLH4CTFYQ", "xjmXd9iMkHOnz3fSbERVsvpB0KefYVC061q3UaY5"
             var ec2DataProvider = new ComputeDataProvider();
             var instances = ec2DataProvider
                 .FindInstances(keyId: accessKey, key: secretKey, loadImages: loadImages)
@@ -246,7 +243,6 @@ namespace DeploymentHubWebsite.Controllers
 
             System.Diagnostics.Trace.TraceError("Calling into FromBase64String");
 
-            System.Diagnostics.Trace.TraceError("cert = " + userCreds.ManagementCertificate);
 
             var binaryCert = Convert.FromBase64String(userCreds.ManagementCertificate);
 
